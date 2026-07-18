@@ -124,7 +124,279 @@ WHERE Salary>50000;
 SELECT MAX(Salary)-MIN(Salary)
 FROM Employee;
 ---------
+21) Count employees in each department.
+SELECT Department, COUNT(*)
+FROM Employee
+GROUP BY Department;
+----------
+22)Find total salary in each department.
+SELECT Department,
+SUM(Salary)
+FROM Employee
+GROUP BY Department;
+-----------
+23)Find average salary in each department.
+SELECT Department,
+AVG(Salary)
+FROM Employee
+GROUP BY Department;
+-------
+24)Find highest salary in every department.
+SELECT Department,
+MAX(Salary)
+FROM Employee
+GROUP BY Department;
+----------
+25)Find lowest salary in every department.
+SELECT Department,
+MIN(Salary)
+FROM Employee
+GROUP BY Department;
+--------
+26)Show departments having more than 2 employees.
+SELECT Department,
+COUNT(*)
+FROM Employee
+GROUP BY Department
+HAVING COUNT(*)>2;
+------------
+27)Show departments whose total salary exceeds 100000.
+SELECT Department,
+SUM(Salary)
+FROM Employee
+GROUP BY Department
+HAVING SUM(Salary)>100000;
+-----------------
+28)Show departments whose average salary is greater than 50000.
+SELECT Department,
+AVG(Salary)
+FROM Employee
+GROUP BY Department
+HAVING AVG(Salary)>50000;
+--------------
+29)Count employees in each department, but only for employees older than 27.
+SELECT Department,
+COUNT(*)
+FROM Employee
+WHERE Age>27
+GROUP BY Department;
+---------
+30)Show departments having at least 2 employees.
+SELECT Department,
+COUNT(*)
+FROM Employee
+GROUP BY Department
+HAVING COUNT(*)>=2;
+---------
+Execution order
+1. FROM
+        ↓
+2. WHERE
+        ↓
+3. GROUP BY
+        ↓
+4. HAVING
+        ↓
+5. SELECT
+        ↓
+6. ORDER BY
 
+----------
+Difference Between Where and Having
+| WHERE                                       | HAVING                         |
+| ------------------------------------------- | ------------------------------ |
+| Filters rows                                | Filters groups                 |
+| Used before GROUP BY                        | Used after GROUP BY            |
+| Cannot use aggregate functions like COUNT() | Can use aggregate functions    |
+| Example: `WHERE Salary > 50000`             | Example: `HAVING COUNT(*) > 2` |
 
+------------
+Common Interview Quetions
+Q1. Can we use GROUP BY without aggregate functions?
+Yes
+Q2. Can we use HAVING without GROUP BY?
+
+✅ Yes, but it's uncommon. HAVING can filter the result of an aggregate over the entire table.
+---------------
+Day - 4
+INSERT, UPDATE, DELETE, ALTER.
+These are called DML (Data Manipulation Language) and DDL (Data Definition Language) commands.
+
+31)Insert a New Employee
+INSERT INTO Employee
+VALUES (104, 'Meena', 'Sales', 40000);
+--------
+32)Insert Data into Specific Columns
+INSERT INTO Employee (EmpID, Name, Department)
+VALUES (105, 'Siva', 'HR');
+--------
+33)Update Ravi's Salary to 55000
+UPDATE Employee
+SET Salary = 55000
+WHERE Name = 'Ravi';
+------------
+Interview Quetions
+1)What happens if you forget the WHERE clause?
+Every employee's salary becomes 60000!
+(Always use WHERE unless you intentionally want to update all rows.)
+----------
+34)Increase IT Employees' Salary to 70000
+UPDATE Employee
+SET Salary = 70000
+WHERE Department = 'IT';
+-----------
+35)Delete Meena's Record
+DELETE FROM Employee
+WHERE Name = 'Meena';
+--------
+DELETE
+
+👉 Remove row(s).
+
+WHERE
+
+👉 Choose which row(s) to delete.
+----------
+Interview Question
+1)What happens if WHERE is omitted?
+Every row is deleted.
+-----------
+36)Delete All HR Employees
+DELETE FROM Employee
+WHERE Department = 'HR';
+-------
+37)Add an Email Column
+ALTER TABLE Employee
+ADD Email VARCHAR(100);
+-----------
+38)Remove the Email Column
+ALTER TABLE Employee
+DROP COLUMN Email;
+----------
+39)Rename a Column
+ALTER TABLE Employee
+RENAME COLUMN Salary TO MonthlySalary;
+------------
+40)Change the Data Type of Salary
+ALTER TABLE Employee
+MODIFY Salary BIGINT;
+----------
+Difference Between DELETE, TRUNCATE, and DROP 
+| DELETE                | TRUNCATE           | DROP                     |
+| --------------------- | ------------------ | ------------------------ |
+| Deletes selected rows | Deletes all rows   | Deletes the entire table |
+| Can use `WHERE`       | Cannot use `WHERE` | No `WHERE`               |
+| Table remains         | Table remains      | Table is removed         |
+| Slower                | Faster             | Removes table completely |
+-------------
+🎯 Interview Tips
+1. Why is WHERE important in UPDATE and DELETE?
+
+Because without it, all rows are affected.
+
+2. Which command removes the table permanently?
+
+✅ DROP TABLE
+
+3. Which command removes all rows but keeps the table?
+
+✅ TRUNCATE TABLE
+
+4. Which command can delete only selected rows?
+
+✅ DELETE
+------------
+Remember SQL Keywords
+Always write them in this order:
+INSERT INTO
+------
+UPDATE
+SET
+WHERE
+-------
+DELETE FROM
+WHERE
+-------
+ALTER TABLE
+ADD
+--------
+ALTER TABLE
+DROP COLUMN
+-------
+Day - 5
+JOINS
+General Syntax
+SELECT columns
+FROM Table1
+JOIN Table2
+ON Table1.column = Table2.column;
+----------
+41)Display Employee Name and Department Name.
+SELECT Name, Department
+FROM Employee
+INNER JOIN Department
+ON Employee.DeptID = Department.DeptID;
+--------------
+"INNER = Intersection"
+Only common (matching) records appear.
+-----------
+42)Display all employees, even if they don't have a matching department.
+SELECT Name, Department
+FROM Employee
+LEFT JOIN Department
+ON Employee.DeptID = Department.DeptID;
+--------
+LEFT = Love Left
+No matter what happens, it keeps every row from the left table.(EVEN The value doesnt exit)
+---------
+43)Show all departments, even if no employee works there.
+SELECT Name, Department
+FROM Employee
+RIGHT JOIN Department
+ON Employee.DeptID = Department.DeptID;
+----------
+RIGHT = Respect Right
+Always keeps every row from the right table.
+----------
+44)Show everything from both tables.
+SELECT Name, Department
+FROM Employee
+FULL OUTER JOIN Department
+ON Employee.DeptID = Department.DeptID;
+----------
+Employee        Department
+
+   ◯              ◯
+
+INNER
+
+      ●
+
+Only overlap
+
+-------------------
+
+LEFT
+
+Entire Left
+
+◯●
+
+-------------------
+
+RIGHT
+
+Entire Right
+
+●◯
+
+-------------------
+
+FULL
+
+Everything
+
+◯◯
+--------------
 
 
