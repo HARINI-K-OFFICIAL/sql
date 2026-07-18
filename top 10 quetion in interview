@@ -31,7 +31,100 @@ GROUP BY AND ORER BY
         * COUNT OF EMPLOEES IN EACH DEPARTMENT
  2)ORDER BY IT IS LIKE SORTING ROWS IN A PARTICULAR ORDER
 
-WHERE AND HAVING CLAUSE
+Daily 10 Quetion:
+
+1) Display all employee details. 
+SELECT *
+FROM Employee;
+-----------
+2) Display only employee names.
+SELECT Name
+FROM Employee;
+--------------
+3)Display employees whose salary is greater than 50000.
+SELECT *
+FROM Employee
+WHERE Salary > 50000;
+-------------
+4) Display employees from the IT department.
+SELECT *
+FROM Employee
+WHERE Department = 'IT';
+-------------
+5) Display employees whose age is greater than 28.
+SELECT *
+FROM Employee
+WHERE Age > 28;
+--------
+6)Display employees sorted by salary (Ascending).
+SELECT *
+FROM Employee
+ORDER BY Salary ASC;
+----------
+7) Display employees sorted by salary (Descending).
+SELECT *
+FROM Employee
+ORDER BY Salary DESC;
+--------
+8)Display only first 3 employees.
+SELECT *
+FROM Employee
+LIMIT 3;
+--------
+9)Display employees whose salary is between 40000 and 60000.
+SELECT *
+FROM Employee
+WHERE Salary BETWEEN 40000 AND 60000;
+----------
+10) Display employees whose names start with R.
+SELECT *
+FROM Employee
+WHERE Name LIKE 'R%';
+-----------
+11) Count the total number of employees.
+SELECT COUNT(*)
+FROM Employee;
+----------
+12) Count employees only in the IT department.
+SELECT COUNT(*)
+FROM Employee
+WHERE Department='IT';
+----------
+13)Find the total salary of all employees.
+SELECT SUM(Salary)
+FROM Employee;
+-----------
+14)Find the average salary.
+SELECT AVG(Salary)
+FROM Employee;
+-----------
+15)Find the highest salary.
+SELECT MAX(Salary)
+FROM Employee;
+-----------
+16)Find the lowest salary.
+SELECT MIN(Salary)
+FROM Employee;
+-------
+17)Find the average age of employees.
+SELECT AVG(Age)
+FROM Employee;
+--------
+18)Find the total salary of IT employees.
+SELECT SUM(Salary)
+FROM Employee
+WHERE Department='IT';
+----------------
+19)Count employees whose salary is greater than 50000.
+SELECT COUNT(*)
+FROM Employee
+WHERE Salary>50000;
+----------
+20) Find the difference between the highest and lowest salary.
+SELECT MAX(Salary)-MIN(Salary)
+FROM Employee;
+---------
 
 
-  
+
+
