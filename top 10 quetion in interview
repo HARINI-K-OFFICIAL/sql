@@ -443,3 +443,47 @@ FROM Employee
 LEFT JOIN Department
 ON Employee.DeptID = Department.DeptID
 WHERE Department IS NULL;
+----------
+Which clause is used to connect two tables?
+ON
+-----------
+What is a Subquery?
+A Subquery is a query written inside another query.
+Think of it like asking your friend a question before answering someone else.
+----------
+Feneral Syntax
+SELECT ...
+FROM Table
+WHERE Column = (
+      SELECT ...
+      FROM Table
+);
+The inner querry executes first.
+----------
+51)Find the employee with the highest salary.
+SELECT *
+FROM Employee
+WHERE Salary = (
+      SELECT MAX(Salary)
+      FROM Employee
+);
+--------
+52)Find employees earning more than the average salary.
+SELECT Name, Salary
+FROM Employee
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+);
+------------
+53)Find employees earning less than the average salary.
+SELECT *
+FROM Employee
+WHERE Salary <
+(
+SELECT AVG(Salary)
+FROM Employee
+);
+-------------
+54)Find employees working in the IT department.
