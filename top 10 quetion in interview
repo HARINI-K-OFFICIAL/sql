@@ -398,5 +398,44 @@ Everything
 
 ◯◯
 --------------
+45)Find employees who don't have a department.
 
+SELECT Name
+FROM Employee
+LEFT JOIN Department
+ON Employee.DeptID = Department.DeptID
+WHERE Department.DeptID IS NULL;
+---------
+46)Find departments that don't have employees.
+SELECT Department
+FROM Employee
+RIGHT JOIN Department
+ON Employee.DeptID = Department.DeptID
+WHERE Employee.EmpID IS NULL;
+----------
+47)Display employee names and salaries with department names.
+SELECT Name,
+Salary,
+Department
+FROM Employee
+INNER JOIN Department
+ON Employee.DeptID = Department.DeptID;
+-----------
+48)Count employees in each department.
+SELECT Department,
+COUNT(Employee.EmpID)
+FROM Department
+LEFT JOIN Employee
+ON Employee.DeptID = Department.DeptID
+GROUP BY Department;
+-----------
+49)Display only employees working in IT.
+SELECT Name,
+Department
+FROM Employee
+INNER JOIN Department
+ON Employee.DeptID = Department.DeptID
+WHERE Department = 'IT';
+-----------
+50)Find employees whose department is missing.
 
