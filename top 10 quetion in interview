@@ -438,4 +438,8 @@ ON Employee.DeptID = Department.DeptID
 WHERE Department = 'IT';
 -----------
 50)Find employees whose department is missing.
-
+SELECT Name
+FROM Employee
+LEFT JOIN Department
+ON Employee.DeptID = Department.DeptID
+WHERE Department IS NULL;
