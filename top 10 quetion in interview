@@ -486,4 +486,72 @@ SELECT AVG(Salary)
 FROM Employee
 );
 -------------
-54)Find employees working in the IT department.
+THARUN QUETION PAPER PRACTICE
+
+QUERRY TEMPLATE
+SELECT column,
+AggregateFunction(column)
+FROM table
+WHERE condition
+GROUP BY column
+HAVING aggregate_condition
+ORDER BY column DESC;
+-------------------------
+1. Display the number of employees working in each department.
+SELECT Department, COUNT(*)
+FROM Employee
+GROUP BY Department;
+-------------------
+2. Display the highest salary in each department.
+SELECT Department, MAX(Salary)
+FROM Employee
+GROUP BY Department;
+--------------
+3(a). Display the Designation and the number of employees in each designation.
+SELECT Designation, COUNT(*)
+FROM EmpSalary
+GROUP BY Designation;
+--------------
+3(b). Display the Designation and average salary of employees in each designation.
+SELECT Designation, AVG(Salary)
+FROM EmpSalary
+GROUP BY Designation;
+-----------
+3(c). Display only those designations where average salary is greater than ₹50,000.
+SELECT Designation, AVG(Salary)
+FROM EmpSalary
+GROUP BY Designation
+HAVING AVG(Salary) > 50000;
+---------------------
+4.1 Display Department, Number of Employees and Average Salary.
+SELECT Dept,
+       COUNT(*) AS NumberOfEmployees,
+       AVG(Salary) AS AverageSalary
+FROM Job
+GROUP BY Dept;
+--------------
+4.2 Display only departments where Average salary > 6000 Employee count ≥ 2
+SELECT Dept,
+       COUNT(*) AS NumberOfEmployees,
+       AVG(Salary) AS AverageSalary
+FROM Job
+GROUP BY Dept
+HAVING AVG(Salary) > 6000
+   AND COUNT(*) >= 2;
+--------------
+4.3 Display the highest salary in each department.
+SELECT Dept, MAX(Salary)
+FROM Job
+GROUP BY Dept;
+--------------
+4.4 Display the total salary paid by each department.
+SELECT Dept, SUM(Salary)
+FROM Job
+GROUP BY Dept;
+-----------
+4.5 Arrange departments in descending order of average salary.
+SELECT Dept, AVG(Salary)
+FROM Job
+GROUP BY Dept
+ORDER BY AVG(Salary) DESC;
+-----------
