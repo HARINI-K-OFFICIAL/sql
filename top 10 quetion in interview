@@ -559,3 +559,113 @@ FROM Job
 GROUP BY Dept
 ORDER BY AVG(Salary) DESC;
 -----------
+A. Find the employee who has the lowest salary.
+vs.
+B. Find the lowest salary in every department.
+They sound similar, but they ask for different outputs.
+-------------
+They sound similar, but they ask for different outputs.
+1. Find the lowest salary in every department
+| Employee | Department | Salary |
+| -------- | ---------- | -----: |
+| Ravi     | IT         |  50000 |
+| Arun     | IT         |  70000 |
+| Priya    | HR         |  40000 |
+| Meena    | HR         |  55000 |
+| Kumar    | Sales      |  45000 |
+Question says:
+Lowest salary in every department
+Break the English:
+Lowest salary → MIN(Salary)
+Every department → GROUP BY Department
+SO:
+SELECT Department, MIN(Salary)
+FROM Employee
+GROUP BY Department;
+Output
+| Department | MIN(Salary) |
+| ---------- | ----------: |
+| IT         |       50000 |
+| HR         |       40000 |
+| Sales      |       45000 |
+That's all the question asks for.
+It doesn't ask for the employee's name.
+2. Find the employee with the lowest salary
+Now the question changes:
+Find the employee who earns the lowest salary.
+Here we need the person, not just the minimum value.
+If you write:
+SELECT MIN(Salary)
+FROM Employee;
+you only get: 40000
+But we need: Priya    40000
+So first find the minimum salary:
+SELECT MIN(Salary)
+FROM Employee;
+Then find who has that salary:
+SELECT Employee, Salary
+FROM Employee
+WHERE Salary = (
+    SELECT MIN(Salary)
+    FROM Employee
+);
+Output
+Employee	Salary
+Priya    	40000
+| Question                                                 | What it wants        | Technique                              |
+| -------------------------------------------------------- | -------------------- | -------------------------------------- |
+| Find **lowest salary**                                   | Value                | `MIN()`                                |
+| Find lowest salary **in every department**               | Value per group      | `MIN()` + `GROUP BY`                   |
+| Find **employee with lowest salary**                     | Person/row           | Subquery                               |
+| Find **employee with lowest salary in every department** | Person/row per group | More advanced subquery/window function |
+------------------------
+VALUE only → aggregate function
+VALUE for EACH GROUP → aggregate + GROUP BY
+WHO has that value → usually subquery
+
+level 1
+Display the employee(s) who earn the highest salary.
+SELECT Employee, Salary
+FROM table_name
+WHERE Salary = (
+    SELECT MAX(Salary)
+    FROM table_name
+);
+-------------
+Q2
+Display the employee(s) who earn the lowest salary.
+SELECT Employee, Salary
+FROM table_name
+WHERE Salary = (
+    SELECT MIN(Salary)
+    FROM table_name
+);
+------------
+Q3
+Display employees whose salary is greater than the average salary.
+SELECT employee, salary
+FROM table_name
+WHERE salary >
+(
+SELECT AVG(salaary)
+FROM table_name
+);
+-----------------
+Q4.Display employees whose salary is less than the average salary.
+SELECT Employee, Salary
+FROM table_name
+WHERE Salary <
+(
+    SELECT AVG(Salary)
+    FROM table_name
+);
+--------------
+Q5.
+Display the second highest salary.
+SELECT MAX(Salary)
+FROM Employee
+WHERE Salary < (
+    SELECT MAX(Salary)
+    FROM Employee
+);
+
